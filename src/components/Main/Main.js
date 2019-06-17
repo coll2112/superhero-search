@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import Card from '../Card/Card';
+import SuperheroList from './SuperheroList';
 import axios from 'axios';
 
 class Main extends Component {
   constructor() {
     super();
     this.state = {
-      superhero: [],
-      search: ''
+      superheroResults: [],
+      search: '',
+      isLoading: false,
+      isErr: false
     };
   }
 
@@ -14,39 +18,45 @@ class Main extends Component {
     this.setState({ search: e });
   };
 
-  searchSuperheroes = () => {
+  searchSuperheroes = (e) => {
+    e.preventDefault();
+    this.setState({ isLoading: true });
     axios
       .post(`/api/superhero`, { superhero: this.state.search })
       .then((response) => {
         // console.log(response.data);
-        this.setState({ superhero: response.data.results });
+        this.setState({ superheroResults: response.data.results, isLoading: false });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        this.setState({ isErr: true });
+      });
   };
 
   render() {
-    const superheroMap = this.state.superhero.map((e, id) => {
-      return (
-        <div key={id}>
-          <h3>{e.name}</h3>
-          <p>{e.appearance.height[0]}</p>
-          <p>{e.appearance.gender}</p>
-          <p>{e.appearance.race}</p>
-          <p>{e.biography['full-name']}</p>
-          <img src={e.image.url} />
-        </div>
-      );
-    });
     console.log(this.state.superhero);
     return (
       <div>
-        <input
-          name='search'
-          onChange={(e) => this.inputSearch(e.target.value)}
-          placeholder='superhero'
-        />
-        <button onClick={this.searchSuperheroes}>Search</button>
-        {superheroMap}
+        <form onSubmit={this.searchSuperheroes}>
+          <input
+            name='search'
+            onChange={(e) => this.inputSearch(e.target.value)}
+            placeholder='superhero'
+          />
+          <button>Search</button>
+        </form>
+        {/* {this.state.isLoading ? (
+          <h3>Loading...</h3>
+        ) : (
+          <SuperheroList superhero={this.state.superhero.results} />
+        )} */}
+        {this.state.isLoading ? (
+          <p className='text-center'>Loading Profiles...</p>
+        ) : this.state.isErr ? (
+          <p className='text-center'>Superhero Not Found. Try Again.</p>
+        ) : (
+          <SuperheroList superhero={this.state.superheroResults} />
+        )}
       </div>
     );
   }
