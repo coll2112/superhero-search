@@ -8,6 +8,7 @@ class Main extends Component {
     super();
     this.state = {
       superheroResults: [],
+      apiResponse: [],
       search: '',
       isLoading: false,
       isErr: false
@@ -25,7 +26,11 @@ class Main extends Component {
       .post(`/api/superhero`, { superhero: this.state.search })
       .then((response) => {
         // console.log(response.data);
-        this.setState({ superheroResults: response.data.results, isLoading: false });
+        this.setState({
+          superheroResults: response.data.results,
+          apiResponse: response.data,
+          isLoading: false
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -34,7 +39,7 @@ class Main extends Component {
   };
 
   render() {
-    console.log(this.state.superhero);
+    console.log(this.state.apiResponse.response);
     return (
       <div>
         <form onSubmit={this.searchSuperheroes}>
@@ -52,10 +57,17 @@ class Main extends Component {
         )} */}
         {this.state.isLoading ? (
           <p className='text-center'>Loading Profiles...</p>
-        ) : this.state.isErr ? (
-          <p className='text-center'>Superhero Not Found. Try Again.</p>
+        ) : this.state.apiResponse.response === 'error' ? (
+          <div className='text-center'>
+            <p>Superhero Not Found.</p>
+            <p>
+              The API being used has some superhero names with spaces in
+              between. For example, 'Iron Man' instead of 'Ironman'.
+            </p>
+          </div>
         ) : (
           <SuperheroList superhero={this.state.superheroResults} />
+          // this.state.apiResponse.response
         )}
       </div>
     );
