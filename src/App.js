@@ -1,10 +1,14 @@
 import React from 'react';
-import Main from './components/Main/Main';
+// import Search from './components/Search/Search';
+// import Landing from './components/Landing/Landing';
+import routes from './routes';
 
 function App() {
   return (
     <div className='App'>
-      <Main />
+      {/* <Search /> */}
+      {/* <Landing /> */}
+      {routes}
     </div>
   );
 }

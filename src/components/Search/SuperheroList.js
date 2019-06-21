@@ -1,7 +1,11 @@
 import React from 'react';
 import Card from '../Card/Card';
+import { connect } from 'react-redux';
+import { getSuperheroes } from '../../ducks/reducer';
 
-export default function SuperheroList(props) {
+function SuperheroList(props) {
+  // console.log(props.superhero);
+
   return props.superhero.map((e, id) => {
     const { appearance, biography, image } = e;
     return (
@@ -15,7 +19,15 @@ export default function SuperheroList(props) {
         publisher={biography.publisher}
         firstAppearance={biography['first-appearance']}
         image={image.url}
+        id={e.id}
       />
     );
   });
 }
+
+const mapStateToProps = (state) => state;
+
+export default connect(
+  mapStateToProps,
+  { getSuperheroes }
+)(SuperheroList);
