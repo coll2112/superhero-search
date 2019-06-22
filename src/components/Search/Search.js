@@ -16,9 +16,9 @@ class Search extends Component {
         'Entering the Batcave...',
         'Stopping Hydra...',
         'Retrieving Infinity Stones...',
-        'Getting mad...',
         'Saving Metropolis...',
-        'Assembling Avengers...'
+        'Assembling Avengers...',
+        'Forming a league...'
       ],
       search: '',
       isLoading: false,
@@ -33,21 +33,6 @@ class Search extends Component {
   searchSuperheroes = (e, props) => {
     e.preventDefault();
     this.props.getSuperheroes(this.state.search);
-    // this.setState({ isLoading: true });
-    // axios
-    //   .get(`/api/search/${this.state.search}`)
-    //   .then((response) => {
-    //     // console.log(response.data);
-    //     this.setState({
-    //       superheroResults: response.data.results,
-    //       apiResponse: response.data,
-    //       isLoading: false
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     this.setState({ isErr: true });
-    //   });
   };
 
   render() {
@@ -99,8 +84,17 @@ class Search extends Component {
             </p>
           </div>
         ) : (
-          <div className='d-flex flex-row justify-content-around align-items-center'>
-            {this.props.superhero ? <SuperheroList /> : null}
+          <div
+            className='d-flex flex-column align-items-center'
+            style={{ minHeight: '100vh' }}
+          >
+            {this.props.superhero ? (
+              <SuperheroList />
+            ) : (
+              <div className=''>
+                <p>Search for a superhero within the database.</p>
+              </div>
+            )}
           </div>
         )}
       </div>

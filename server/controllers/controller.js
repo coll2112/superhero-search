@@ -14,14 +14,23 @@ const searchSuperheroes = (req, res) => {
 };
 
 getHeroDetails = async (req, res) => {
-  let heroData = req.params.heroData;
-  try {
-    let response = await axios.get(`${url}${authKey}/${heroData}`);
-    res.status(200).send(response.data);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
-  }
+  let id = req.params.id;
+  // try {
+  //   let response = await axios.get(`${url}${authKey}/${id}`);
+  //   res.status(200).send(response.data);
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).send(err);
+  // }
+  axios
+    .get(`${url}${authKey}/${id}`)
+    .then((response) => {
+      console.log('hit');
+      res.status(200).send(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 module.exports = {

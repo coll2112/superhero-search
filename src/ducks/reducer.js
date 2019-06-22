@@ -43,16 +43,16 @@ export default function reducer(state = initialState, action) {
         ...state,
         isErr: true
       };
+    case `${SUPERHERO_DETAILS}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
     case `${SUPERHERO_DETAILS}_FULFILLED`:
       return {
         ...state,
         stats: action.payload.data,
         isLoading: false
-      };
-    case `${SUPERHERO_DETAILS}_PENDING`:
-      return {
-        ...state,
-        isLoading: true
       };
     case `${SUPERHERO_DETAILS}_REJECTED`:
       return {

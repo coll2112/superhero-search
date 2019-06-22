@@ -11,7 +11,7 @@ const {
 app.use(json());
 
 app.get('/api/search/:name', searchSuperheroes);
-app.get('/api/search/hero/:heroData', getHeroDetails);
+app.get('/api/search/hero/:id', getHeroDetails);
 
 app.listen(port, () => {
   console.log(`Listening on Port ${port}`);
