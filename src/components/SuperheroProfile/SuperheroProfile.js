@@ -33,30 +33,39 @@ class SuperheroProfile extends Component {
         </div>
       </div>
     ) : (
-      <div>
+      <div className='card d-flex flex-row align-items-stretch'>
         <Image
           src={stats.image.url}
           alt={`Image of ${this.props.stats.name}`}
           fluid
+          className='card-image-top'
+          style={{ minWidth: '50vw' }}
         />
-        <h2>{this.props.stats.name}</h2>
-        <div>
-          <h3>Appearance:</h3>
-          <p>Gender: {appearance.gender}</p>
-          <p>Race: {appearance.race}</p>
-          <p>Height: {appearance.height[0]}</p>
-          <p>Eye Color: {appearance['eye-color']}</p>
-          <p>Hair Color: {appearance['hair-color']}</p>
+        <div className='' style={{ minWidth: '50vw' }}>
+          <div className='card-header'>
+            <h2 className='card-title text-center'>{this.props.stats.name}</h2>
+          </div>
+          <div className='card-body card-text'>
+            <h3>Appearance:</h3>
+            <p>Gender: {appearance.gender}</p>
+            <p>Race: {appearance.race}</p>
+            <p>Height: {appearance.height[0]}</p>
+            <p>Eye Color: {appearance['eye-color']}</p>
+            <p>Hair Color: {appearance['hair-color']}</p>
+          </div>
+          <div className='card-body card-text'>
+            <h3>Biography:</h3>
+            <p>Published By: {biography.publisher}</p>
+            <p>Full Name: {biography['full-name']}</p>
+            <p>First Appearance: {biography['first-appearance']}</p>
+          </div>
+          <button
+            className='btn-lg btn-outline-primary btn-block w-50 m-auto'
+            onClick={this.goBack}
+          >
+            Back to Search
+          </button>
         </div>
-        <div>
-          <h3>Biography:</h3>
-          <p>Published By: {biography.publisher}</p>
-          <p>Full Name: {biography['full-name']}</p>
-          <p>First Appearance: {biography['first-appearance']}</p>
-        </div>
-        <button className='btn btn-secondary' onClick={this.goBack}>
-          Back to Search
-        </button>
       </div>
     );
   }

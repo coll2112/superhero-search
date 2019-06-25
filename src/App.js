@@ -1,13 +1,11 @@
 import React from 'react';
-// import Search from './components/Search/Search';
-// import Landing from './components/Landing/Landing';
 import routes from './routes';
+import Navigation from './components/Navigation/Navigation';
 
 function App() {
   return (
     <div className='App'>
-      {/* <Search /> */}
-      {/* <Landing /> */}
+      <Navigation />
       {routes}
     </div>
   );

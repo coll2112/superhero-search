@@ -12,30 +12,35 @@ function Card(props) {
   }
 
   return (
-    <div
-      className='card'
-      style={{ width: '50vw', marginTop: '1rem', marginBottom: '1rem' }}
-    >
-      <Image
-        src={props.image}
-        className='card-img-top'
-        alt='...'
-        fluid
-        thumnail
-      />
-      <div className='card-header'>
-        <h2 className='card-title text-center'>{props.name}</h2>
-        <h5>Identity:</h5>
-        <p>{props.fullName}</p>
-        <Link to={`/search/${props.id}`}>
-          <Button
-            onClick={() => myFunc(props.id)}
-            className='btn btn-primary'
-            block
-          >
-            View More
-          </Button>
-        </Link>
+    <div className='col-xs-1 col-sm-4 col-md-3'>
+      <div className='card' style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+        <Image
+          src={props.image}
+          className='card-img-top'
+          alt='Image of Superhero'
+          style={{ height: '40vh' }}
+        />
+        <div className='card-header'>
+          <h2 className='card-title text-center'>{props.name}</h2>
+          <div className='card-body'>
+            <h6 className='card-text'>Identity: </h6>
+            {props.fullName == false ? (
+              <p className='card-text'>Not Available</p>
+            ) : (
+              <p className='card-text'>{props.fullName}</p>
+            )}
+            {/* <p className='card-text'>{props.fullName}</p> */}
+            <Link to={`/search/${props.id}`}>
+              <Button
+                onClick={() => myFunc(props.id)}
+                className='btn btn-primary'
+                block
+              >
+                View More
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

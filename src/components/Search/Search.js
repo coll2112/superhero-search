@@ -38,7 +38,7 @@ class Search extends Component {
   render() {
     // console.log(this.props.superhero);
     return (
-      <div style={{ minHeight: '100vh' }}>
+      <div>
         <form
           onSubmit={this.searchSuperheroes}
           className='input-group mb-3'
@@ -84,12 +84,11 @@ class Search extends Component {
             </p>
           </div>
         ) : (
-          <div
-            className='d-flex flex-column align-items-center'
-            style={{ minHeight: '100vh' }}
-          >
+          <div style={{ minHeight: '100vh' }}>
             {this.props.superhero ? (
-              <SuperheroList />
+              <div className='card-group'>
+                <SuperheroList />
+              </div>
             ) : (
               <div className=''>
                 <p>Search for a superhero within the database.</p>
