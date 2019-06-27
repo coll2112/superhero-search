@@ -36,19 +36,18 @@ class Search extends Component {
   };
 
   render() {
-    // console.log(this.props.superhero);
+    console.log(this.props.superhero);
     return (
       <div>
         <form
           onSubmit={this.searchSuperheroes}
           className='input-group mb-3'
-          className='d-flex justify-content-center'
+          className='d-flex justify-content-center align-items-center'
         >
           <input
             name='search'
             onChange={(e) => this.inputSearch(e.target.value)}
             placeholder='Superhero Name'
-            // style={{ textTransform: 'capitalize' }}
             required={true}
             className='form-control w-25'
           />
@@ -56,7 +55,7 @@ class Search extends Component {
         </form>
         {this.props.isLoading ? (
           <div
-            // style={{ minHeight: '100vh' }}
+            style={{ minHeight: '100vh' }}
             className='text-center d-flex flex-column justify-content-center align-items-center'
           >
             <img
@@ -83,17 +82,13 @@ class Search extends Component {
               between. For example, 'Iron Man' instead of 'Ironman'.
             </p>
           </div>
+        ) : this.props.superhero ? (
+          <div className='card-group'>
+            <SuperheroList />
+          </div>
         ) : (
-          <div style={{ minHeight: '100vh' }}>
-            {this.props.superhero ? (
-              <div className='card-group'>
-                <SuperheroList />
-              </div>
-            ) : (
-              <div className=''>
-                <p>Search for a superhero within the database.</p>
-              </div>
-            )}
+          <div className='text-center'>
+            <p>Search for a superhero within the database.</p>
           </div>
         )}
       </div>
